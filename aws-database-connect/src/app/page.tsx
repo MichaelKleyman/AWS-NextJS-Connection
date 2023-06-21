@@ -1,6 +1,33 @@
-import { useState } from 'react';
+'use client';
+import { useState, useEffect } from 'react';
+import useSWR from 'swr';
+
+interface User {
+  id: number;
+  name: string;
+  description: string;
+}
 
 export default function Home() {
+  const [users, setUsers] = useState<User[]>();
+
+  const fetcher = (...args: Parameters<typeof fetch>): Promise<any> =>
+    fetch(...args).then((res) => res.json());
+
+  const { data, error, isLoading } = useSWR('/api', fetcher);
+
+  useEffect(() => {
+    if (data) setUsers(data);
+  }, [data]);
+
+  if (error) return <div>Failed to load</div>;
+  if (isLoading)
+    return (
+      <div className='flex items-center justify-center mt-[5rem]'>
+        Loading...
+      </div>
+    );
+
   return (
     <main className='flex min-h-screen flex-col items-center justify-between p-24'>
       <div className='z-10 w-full max-w-5xl items-center justify-evenly font-mono text-sm lg:flex'>
@@ -24,7 +51,16 @@ export default function Home() {
                 Description
               </td>
             </tr>
-            <tr className='border border-blue-500 p-8'>
+            {users?.map((user: User, i: number) => (
+              <tr key={user.id} className='border border-blue-500 p-8'>
+                <td className='border border-blue-500 p-8'>{i + 1}</td>
+                <td className='border border-blue-500 p-8'>{user.name}</td>
+                <td className='border border-blue-500 p-8'>
+                  {user.description}
+                </td>
+              </tr>
+            ))}
+            {/* <tr className='border border-blue-500 p-8'>
               <td className='border border-blue-500 p-8'>1</td>
             </tr>
             <tr className='border border-blue-500 p-8'>
@@ -32,7 +68,7 @@ export default function Home() {
             </tr>
             <tr className='border border-blue-500 p-8'>
               <td className='border border-blue-500 p-8'>1</td>
-            </tr>
+            </tr> */}
           </tbody>
         </table>
       </div>
