@@ -15,13 +15,16 @@ export default function Home() {
   const fetcher = (...args: Parameters<typeof fetch>): Promise<any> =>
     fetch(...args).then((res) => res.json());
 
-  const { data, error, isLoading } = useSWR('/api', fetcher);
+  const { data, error, isLoading } = useSWR('/api/allUsers', fetcher);
 
   useEffect(() => {
     if (data) setUsers(data);
   }, [data]);
 
-  if (error) return <div>Failed to load</div>;
+  if (error) {
+    console.log(error);
+    return <div>Failed to load</div>;
+  }
   if (isLoading)
     return (
       <div className='flex items-center justify-center mt-[5rem]'>
@@ -56,9 +59,9 @@ export default function Home() {
                 <td className='border border-blue-500 p-8'>
                   {user.description}
                 </td>
-                <div>
+                <td>
                   <Link
-                    href='/'
+                    href={`/user/${user.id}`}
                     className='border border-black rounded-lg shadow-lg shadow-blue-300 p-3 hover:scale-110 duration-300 hover:font-bold hover:shadow-blue-400 m-4'
                   >
                     View Guest
@@ -69,7 +72,7 @@ export default function Home() {
                   <button className='border border-black rounded-lg shadow-lg shadow-blue-300 p-3 hover:scale-110 duration-300 hover:font-bold hover:shadow-blue-400 m-4'>
                     Edit Guest
                   </button>
-                </div>
+                </td>
               </tr>
             ))}
             {/* <tr className='border border-blue-500 p-8'>

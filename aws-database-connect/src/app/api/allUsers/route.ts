@@ -1,4 +1,4 @@
-import pool from '../../../db';
+import pool from '../../../../db';
 import { NextRequest, NextResponse } from 'next/server';
 
 export async function GET(request: NextRequest) {
@@ -12,4 +12,3 @@ export async function GET(request: NextRequest) {
     console.error('API ERROR', error);
   }
 }
-
