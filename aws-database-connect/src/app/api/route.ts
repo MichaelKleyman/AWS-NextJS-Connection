@@ -12,3 +12,4 @@ export async function GET(request: NextRequest) {
     console.error('API ERROR', error);
   }
 }
+

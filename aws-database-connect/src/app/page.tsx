@@ -1,6 +1,7 @@
 'use client';
 import { useState, useEffect } from 'react';
 import useSWR from 'swr';
+import Link from 'next/link';
 
 interface User {
   id: number;
@@ -34,9 +35,6 @@ export default function Home() {
         <button className='border border-black rounded-lg shadow-lg shadow-blue-300 p-3 hover:scale-110 duration-300 hover:font-bold hover:shadow-blue-400'>
           Add Guest
         </button>
-        <button className='border border-black rounded-lg shadow-lg shadow-blue-300 p-3 hover:scale-110 duration-300 hover:font-bold hover:shadow-blue-400'>
-          Remove Guest
-        </button>
       </div>
       <label className='flex items-center justify-center text-[2rem]'>
         Guest List
@@ -44,7 +42,7 @@ export default function Home() {
       <div className="relative flex place-items-center before:absolute before:h-[300px] before:w-[480px] before:-translate-x-1/2 before:rounded-full before:bg-gradient-radial before:from-white before:to-transparent before:blur-2xl before:content-[''] after:absolute after:-z-20 after:h-[180px] after:w-[240px] after:translate-x-1/3 after:bg-gradient-conic after:from-sky-200 after:via-blue-200 after:blur-2xl after:content-[''] before:dark:bg-gradient-to-br before:dark:from-transparent before:dark:to-blue-700 before:dark:opacity-10 after:dark:from-sky-900 after:dark:via-[#0141ff] after:dark:opacity-40 before:lg:h-[360px]">
         <table className='w-full'>
           <tbody>
-            <tr className='border border-blue-500 p-8'>
+            <tr className='p-8'>
               <td className='border border-blue-500 p-8'></td>
               <td className='border border-blue-500 p-8 font-medium'>Name</td>
               <td className='border border-blue-500 p-8 font-medium'>
@@ -52,12 +50,26 @@ export default function Home() {
               </td>
             </tr>
             {users?.map((user: User, i: number) => (
-              <tr key={user.id} className='border border-blue-500 p-8'>
+              <tr key={user.id} className='p-8'>
                 <td className='border border-blue-500 p-8'>{i + 1}</td>
                 <td className='border border-blue-500 p-8'>{user.name}</td>
                 <td className='border border-blue-500 p-8'>
                   {user.description}
                 </td>
+                <div>
+                  <Link
+                    href='/'
+                    className='border border-black rounded-lg shadow-lg shadow-blue-300 p-3 hover:scale-110 duration-300 hover:font-bold hover:shadow-blue-400 m-4'
+                  >
+                    View Guest
+                  </Link>
+                  <button className='border border-black rounded-lg shadow-lg shadow-blue-300 p-3 hover:scale-110 duration-300 hover:font-bold hover:shadow-blue-400 m-4'>
+                    Remove Guest
+                  </button>
+                  <button className='border border-black rounded-lg shadow-lg shadow-blue-300 p-3 hover:scale-110 duration-300 hover:font-bold hover:shadow-blue-400 m-4'>
+                    Edit Guest
+                  </button>
+                </div>
               </tr>
             ))}
             {/* <tr className='border border-blue-500 p-8'>
