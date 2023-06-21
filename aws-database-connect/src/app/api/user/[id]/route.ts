@@ -4,10 +4,10 @@ import { NextRequest, NextResponse } from 'next/server';
 
 export async function GET(req: NextRequest, { params }: any) {
   try {
-    console.log('param', params);
-
-    return NextResponse.json(params);
-    // const query = `SELECT * from "User" where = ${id}`;
+    const { id } = params;
+    const query = `SELECT * FROM "User" WHERE id = ${id}`;
+    const { rows } = await pool.query(query);
+    return NextResponse.json(rows);
   } catch (error) {
     return NextResponse.json({ error: 'Error' }, { status: 500 });
   }

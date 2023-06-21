@@ -2,6 +2,7 @@
 import { useState, useEffect } from 'react';
 import useSWR from 'swr';
 import Link from 'next/link';
+import AddGuestModal from '@/components/AddGuestModal';
 
 interface User {
   id: number;
@@ -11,6 +12,7 @@ interface User {
 
 export default function Home() {
   const [users, setUsers] = useState<User[]>();
+  const [clickedAdd, setClickedAdd] = useState<boolean>(false);
 
   const fetcher = (...args: Parameters<typeof fetch>): Promise<any> =>
     fetch(...args).then((res) => res.json());
@@ -32,10 +34,18 @@ export default function Home() {
       </div>
     );
 
+  async function addGuest() {
+    console.log('Adding guest');
+    setClickedAdd(true);
+  }
+
   return (
     <main className='flex min-h-screen flex-col items-center justify-between p-24'>
       <div className='z-10 w-full max-w-5xl items-center justify-evenly font-mono text-sm lg:flex'>
-        <button className='border border-black rounded-lg shadow-lg shadow-blue-300 p-3 hover:scale-110 duration-300 hover:font-bold hover:shadow-blue-400'>
+        <button
+          onClick={addGuest}
+          className='border border-black rounded-lg shadow-lg shadow-blue-300 p-3 hover:scale-110 duration-300 hover:font-bold hover:shadow-blue-400'
+        >
           Add Guest
         </button>
       </div>
@@ -87,7 +97,9 @@ export default function Home() {
           </tbody>
         </table>
       </div>
-      <div className='mb-32 grid text-center lg:mb-0 lg:grid-cols-4 lg:text-left'></div>
+      <div className='mb-32 grid text-center lg:mb-0 lg:grid-cols-4 lg:text-left'>
+        <AddGuestModal clickedAdd={clickedAdd} setClickedAdd={setClickedAdd} />
+      </div>
     </main>
   );
 }
