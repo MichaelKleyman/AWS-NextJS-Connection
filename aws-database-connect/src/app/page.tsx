@@ -1,8 +1,13 @@
 'use client';
 import { useState, useEffect } from 'react';
-import useSWR from 'swr';
+import useSWR, { mutate } from 'swr';
 import Link from 'next/link';
 import AddGuestModal from '@/components/AddGuestModal';
+
+interface NewUser {
+  name: string;
+  description: string;
+}
 
 interface User {
   id: number;
@@ -12,6 +17,10 @@ interface User {
 
 export default function Home() {
   const [users, setUsers] = useState<User[]>();
+  const [newGuest, setNewGuest] = useState<NewUser>({
+    name: '',
+    description: '',
+  });
   const [clickedAdd, setClickedAdd] = useState<boolean>(false);
 
   const fetcher = (...args: Parameters<typeof fetch>): Promise<any> =>
@@ -37,6 +46,36 @@ export default function Home() {
   async function addGuest() {
     console.log('Adding guest');
     setClickedAdd(true);
+  }
+
+  async function handleChange(e: React.ChangeEvent<HTMLInputElement>) {
+    setNewGuest((prevState) => ({
+      ...prevState,
+      [e.target.name]: e.target.value,
+    }));
+  }
+
+  async function handleSubmit() {
+    console.log(newGuest);
+    await fetch('/api/allUsers', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(newGuest),
+    });
+    mutate('/api/allUsers'); //trigger a re-fetch of the data and update the table after the new guest is added.
+    setClickedAdd(false);
+  }
+
+  async function handleDelete(userId: number) {
+    await fetch(`api/allUsers?id=${userId}`, {
+      method: 'DELETE',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+    });
+    mutate('/api/allUsers');
   }
 
   return (
@@ -76,7 +115,10 @@ export default function Home() {
                   >
                     View Guest
                   </Link>
-                  <button className='border border-black rounded-lg shadow-lg shadow-blue-300 p-3 hover:scale-110 duration-300 hover:font-bold hover:shadow-blue-400 m-4'>
+                  <button
+                    onClick={() => handleDelete(user.id)}
+                    className='border border-black rounded-lg shadow-lg shadow-blue-300 p-3 hover:scale-110 duration-300 hover:font-bold hover:shadow-blue-400 m-4'
+                  >
                     Remove Guest
                   </button>
                   <button className='border border-black rounded-lg shadow-lg shadow-blue-300 p-3 hover:scale-110 duration-300 hover:font-bold hover:shadow-blue-400 m-4'>
@@ -98,7 +140,12 @@ export default function Home() {
         </table>
       </div>
       <div className='mb-32 grid text-center lg:mb-0 lg:grid-cols-4 lg:text-left'>
-        <AddGuestModal clickedAdd={clickedAdd} setClickedAdd={setClickedAdd} />
+        <AddGuestModal
+          clickedAdd={clickedAdd}
+          setClickedAdd={setClickedAdd}
+          handleChange={handleChange}
+          handleSubmit={handleSubmit}
+        />
       </div>
     </main>
   );

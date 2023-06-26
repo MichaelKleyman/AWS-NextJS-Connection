@@ -1,4 +1,3 @@
-import React from 'react';
 import Button from '@mui/material/Button';
 import Dialog from '@mui/material/Dialog';
 import DialogActions from '@mui/material/DialogActions';
@@ -7,16 +6,25 @@ import DialogContentText from '@mui/material/DialogContentText';
 import DialogTitle from '@mui/material/DialogTitle';
 import TextField from '@mui/material/TextField';
 
+interface User {
+  id: number | null;
+  name: string;
+  description: string;
+}
+
 interface Props {
   clickedAdd: boolean;
   setClickedAdd: React.Dispatch<React.SetStateAction<boolean>>;
+  handleChange: React.ChangeEventHandler<HTMLInputElement>;
+  handleSubmit: React.FormEventHandler;
 }
 
-const AddGuestModal: React.FC<Props> = ({ clickedAdd, setClickedAdd }) => {
-  const handleClickOpen = () => {
-    setClickedAdd(true);
-  };
-
+const AddGuestModal: React.FC<Props> = ({
+  clickedAdd,
+  setClickedAdd,
+  handleChange,
+  handleSubmit,
+}) => {
   const handleClose = () => {
     setClickedAdd(false);
   };
@@ -40,6 +48,8 @@ const AddGuestModal: React.FC<Props> = ({ clickedAdd, setClickedAdd }) => {
               type='text'
               variant='filled'
               fullWidth
+              name='name'
+              onChange={handleChange}
             />
           </div>
           <div className='mt-4'>
@@ -49,12 +59,14 @@ const AddGuestModal: React.FC<Props> = ({ clickedAdd, setClickedAdd }) => {
               type='text'
               variant='filled'
               fullWidth
+              name='description'
+              onChange={handleChange}
             />
           </div>
         </form>
         <DialogActions>
           <Button onClick={handleClose}>Close</Button>
-          <Button onClick={handleClose} autoFocus>
+          <Button onClick={handleSubmit} autoFocus>
             Add
           </Button>
         </DialogActions>

@@ -1,0 +1,31 @@
+{
+  "dev": {
+    "awscloudformation": {
+      "AuthRoleName": "amplify-awsdatabaseconnect-dev-140343-authRole",
+      "UnauthRoleArn": "arn:aws:iam::469696322114:role/amplify-awsdatabaseconnect-dev-140343-unauthRole",
+      "AuthRoleArn": "arn:aws:iam::469696322114:role/amplify-awsdatabaseconnect-dev-140343-authRole",
+      "Region": "us-east-2",
+      "DeploymentBucketName": "amplify-awsdatabaseconnect-dev-140343-deployment",
+      "UnauthRoleName": "amplify-awsdatabaseconnect-dev-140343-unauthRole",
+      "StackName": "amplify-awsdatabaseconnect-dev-140343",
+      "StackId": "arn:aws:cloudformation:us-east-2:469696322114:stack/amplify-awsdatabaseconnect-dev-140343/ca67b140-144b-11ee-b13d-0a2c60fdec95",
+      "AmplifyAppId": "d1oobutrvuxxr1"
+    },
+    "categories": {
+      "function": {
+        "awsdatabaseconnect5eeb8b4d": {
+          "dbHost": "database-1.cuczszdg5wp8.us-east-1.rds.amazonaws.com",
+          "dbPort": "5432",
+          "dbName": "sampleDB",
+          "dbUser": "postgres",
+          "dbPassword": "206480220aB",
+          "deploymentBucketName": "amplify-awsdatabaseconnect-dev-140343-deployment",
+          "s3Key": "amplify-builds/awsdatabaseconnect5eeb8b4d-6e42715a484369654f56-build.zip"
+        }
+      },
+      "api": {
+        "crud": {}
+      }
+    }
+  }
+}

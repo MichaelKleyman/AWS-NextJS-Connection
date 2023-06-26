@@ -1,0 +1,84 @@
+{
+  "api": {
+    "crud": {
+      "dependsOn": [
+        {
+          "attributes": [
+            "Name",
+            "Arn"
+          ],
+          "category": "function",
+          "resourceName": "awsdatabaseconnect5eeb8b4d"
+        }
+      ],
+      "providerPlugin": "awscloudformation",
+      "service": "API Gateway"
+    }
+  },
+  "function": {
+    "awsdatabaseconnect5eeb8b4d": {
+      "build": true,
+      "dependsOn": [],
+      "providerPlugin": "awscloudformation",
+      "service": "Lambda"
+    }
+  },
+  "parameters": {
+    "AMPLIFY_function_awsdatabaseconnect5eeb8b4d_dbHost": {
+      "usedBy": [
+        {
+          "category": "function",
+          "resourceName": "awsdatabaseconnect5eeb8b4d"
+        }
+      ]
+    },
+    "AMPLIFY_function_awsdatabaseconnect5eeb8b4d_dbName": {
+      "usedBy": [
+        {
+          "category": "function",
+          "resourceName": "awsdatabaseconnect5eeb8b4d"
+        }
+      ]
+    },
+    "AMPLIFY_function_awsdatabaseconnect5eeb8b4d_dbPassword": {
+      "usedBy": [
+        {
+          "category": "function",
+          "resourceName": "awsdatabaseconnect5eeb8b4d"
+        }
+      ]
+    },
+    "AMPLIFY_function_awsdatabaseconnect5eeb8b4d_dbPort": {
+      "usedBy": [
+        {
+          "category": "function",
+          "resourceName": "awsdatabaseconnect5eeb8b4d"
+        }
+      ]
+    },
+    "AMPLIFY_function_awsdatabaseconnect5eeb8b4d_dbUser": {
+      "usedBy": [
+        {
+          "category": "function",
+          "resourceName": "awsdatabaseconnect5eeb8b4d"
+        }
+      ]
+    },
+    "AMPLIFY_function_awsdatabaseconnect5eeb8b4d_deploymentBucketName": {
+      "usedBy": [
+        {
+          "category": "function",
+          "resourceName": "awsdatabaseconnect5eeb8b4d"
+        }
+      ]
+    },
+    "AMPLIFY_function_awsdatabaseconnect5eeb8b4d_s3Key": {
+      "usedBy": [
+        {
+          "category": "function",
+          "resourceName": "awsdatabaseconnect5eeb8b4d"
+        }
+      ]
+    }
+  }
+}

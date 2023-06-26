@@ -1,0 +1,12 @@
+{
+  "version": 1,
+  "paths": {
+    "/guests": {
+      "name": "/guests",
+      "lambdaFunction": "awsdatabaseconnect5eeb8b4d",
+      "permissions": {
+        "setting": "open"
+      }
+    }
+  }
+}
