@@ -25,7 +25,7 @@ export async function POST(request: Request) {
   }
 }
 
-export async function DELETE(req: NextApiRequest) {
+export async function DELETE(req: Request) {
   try {
     const id = req.url?.split('?id=')[1];
     const query = `DELETE FROM "User" WHERE id = ${id}`;
