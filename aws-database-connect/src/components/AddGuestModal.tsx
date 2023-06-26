@@ -5,6 +5,7 @@ import DialogActions from '@mui/material/DialogActions';
 import DialogContent from '@mui/material/DialogContent';
 import DialogContentText from '@mui/material/DialogContentText';
 import DialogTitle from '@mui/material/DialogTitle';
+import TextField from '@mui/material/TextField';
 
 interface Props {
   clickedAdd: boolean;
@@ -22,9 +23,6 @@ const AddGuestModal: React.FC<Props> = ({ clickedAdd, setClickedAdd }) => {
 
   return (
     <div>
-      <Button variant='outlined' onClick={handleClickOpen}>
-        Open alert dialog
-      </Button>
       <Dialog
         open={clickedAdd}
         onClose={handleClose}
@@ -32,18 +30,32 @@ const AddGuestModal: React.FC<Props> = ({ clickedAdd, setClickedAdd }) => {
         aria-describedby='alert-dialog-description'
       >
         <DialogTitle id='alert-dialog-title'>
-          {"Use Google's location service?"}
+          Add a Guest To The Table
         </DialogTitle>
-        <DialogContent>
-          <DialogContentText id='alert-dialog-description'>
-            Let Google help apps determine location. This means sending
-            anonymous location data to Google, even when no apps are running.
-          </DialogContentText>
-        </DialogContent>
+        <form className='w-[400px] p-9'>
+          <div className='mb-4'>
+            <TextField
+              id='filled-search'
+              label='Name'
+              type='text'
+              variant='filled'
+              fullWidth
+            />
+          </div>
+          <div className='mt-4'>
+            <TextField
+              id='filled-search'
+              label='Description'
+              type='text'
+              variant='filled'
+              fullWidth
+            />
+          </div>
+        </form>
         <DialogActions>
-          <Button onClick={handleClose}>Disagree</Button>
+          <Button onClick={handleClose}>Close</Button>
           <Button onClick={handleClose} autoFocus>
-            Agree
+            Add
           </Button>
         </DialogActions>
       </Dialog>
